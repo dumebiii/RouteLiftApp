@@ -26,7 +26,7 @@ class IconText extends StatelessWidget {
             style: const TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.w400,
-              color: kdeepur,
+              color: kMapur,
             ))
       ],
     );

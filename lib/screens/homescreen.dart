@@ -51,28 +51,28 @@ class _HomeState extends State<Home> {
               BottomNavigationBarItem(
                 icon: Icon(
                   IconlyBroken.home,
-                  color: kWhite,
+                  color: kGold,
                 ),
                 label: 'Home',
               ),
               BottomNavigationBarItem(
                 icon: Icon(
                   IconlyBroken.search,
-                  color: kWhite,
+                  color: kGold,
                 ),
                 label: 'Search',
               ),
               BottomNavigationBarItem(
                 icon: Icon(
                   IconlyBroken.heart,
-                  color: kWhite,
+                  color: kGold,
                 ),
                 label: 'Heart',
               ),
               BottomNavigationBarItem(
                 icon: Icon(
                   IconlyBroken.buy,
-                  color: kWhite,
+                  color: kGold,
                 ),
                 label: 'Checkout',
               ),
@@ -88,7 +88,7 @@ class _HomeState extends State<Home> {
 
               return SingleChildScrollView(
                 padding: const EdgeInsets.only(
-                    top: 60, left: 30, bottom: 15, right: 0),
+                    top: 60, left: 15, bottom: 15, right: 0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -110,16 +110,31 @@ class _HomeState extends State<Home> {
                           )
                         ]),
                     const Ym(size: 50),
-                    const Text(
-                      'Good Food. \nFast Delivery.',
-                      style: TextStyle(
-                        fontSize: 35,
-                        fontFamily: "Poppins",
-                        fontWeight: FontWeight.bold,
-                        color: kMapur,
+                    const Center(
+                      child: Text(
+                        'AJAYI CROWTHER UNIVERSITY',
+                        style: TextStyle(
+                          fontSize: 25,
+                          fontFamily: "Poppins",
+                          fontWeight: FontWeight.w900,
+                          color: kMapur,
+                        ),
                       ),
                     ),
-                    const Ym(size: 30),
+                    const Ym(size: 2),
+
+                    const Center(
+                      child: Text(
+                        'Delivery App',
+                        style: TextStyle(
+                          fontSize: 25,
+                          fontFamily: "Poppins",
+                          fontWeight: FontWeight.w900,
+                          color: kGold,
+                        ),
+                      ),
+                    ),
+                    const Ym(size: 40),
                     // const Category(),
                     SizedBox(
                       height: 155,
@@ -173,11 +188,14 @@ class _HomeState extends State<Home> {
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Colors.purple,
+                      color: kdeepur,
                     )),
               );
             } else {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(
+                  child: CircularProgressIndicator(
+                color: kdeepur,
+              ));
             }
           }),
     );

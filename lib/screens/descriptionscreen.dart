@@ -31,12 +31,13 @@ class _DescriptionState extends State<Description> {
         .toStringAsFixed(2)
         .replaceAll(RegExp(r"([.]*0)(?!.*\d)"), "");
     return Scaffold(
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: kMapur,
         appBar: buildAppBar(context,
             leading: IconButton(
               icon: const Icon(
                 Icons.arrow_back,
                 size: 30,
+                color: kGold,
               ),
               color: klipur,
               onPressed: () {
@@ -48,7 +49,7 @@ class _DescriptionState extends State<Description> {
                 padding: EdgeInsets.only(right: 15),
                 child: Icon(
                   IconlyBold.heart,
-                  color: klipur,
+                  color: kGold,
                   size: 30,
                 ),
               ),
@@ -75,7 +76,7 @@ class _DescriptionState extends State<Description> {
                         style: const TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
-                          color: kdeepur,
+                          color: kMapur,
                         )),
                   ),
                   const Ym(size: 15),
@@ -104,7 +105,7 @@ class _DescriptionState extends State<Description> {
                           fontSize: 18,
                           fontWeight: FontWeight.w500,
                           fontFamily: 'Poppins',
-                          color: kdeepur,
+                          color: kGold,
                           height: 2.0,
                         )),
                   ),
@@ -135,13 +136,13 @@ class _DescriptionState extends State<Description> {
                                             fontSize: 30,
                                             fontWeight: FontWeight.w900,
                                             fontFamily: 'Poppins',
-                                            color: kMapur,
+                                            color: kGold,
                                           ))),
                                   Text(desc.qty.toString(),
                                       style: const TextStyle(
                                         fontSize: 30,
                                         fontWeight: FontWeight.w900,
-                                        color: kBlack,
+                                        color: kdeepur,
                                       )),
                                   IconButton(
                                       onPressed: () {
@@ -154,26 +155,27 @@ class _DescriptionState extends State<Description> {
                                             fontSize: 32,
                                             fontWeight: FontWeight.w900,
                                             fontFamily: 'Poppins',
-                                            color: kMapur,
+                                            color: kGold,
                                           ))),
                                 ]),
                           ),
                           const Xm(size: 15),
                           GestureDetector(
                             onTap: () async {
-                              await desc.checkoutproducts(
-                                  product.productName.toString(),
-                                  totalprice,
-                                  desc.qty.toString());
+                              Navigator.popAndPushNamed(context, '/hostel');
+                              // await desc.checkoutproducts(
+                              //     product.productName.toString(),
+                              //     totalprice,
+                              //     desc.qty.toString());
 
-                              Navigator.popAndPushNamed(context, '/map',
-                                  arguments: desc.checkoutResult);
+                              // Navigator.popAndPushNamed(context, '/map',
+                              //     arguments: desc.checkoutResult);
                             },
                             child: Container(
                                 height: 80,
                                 width: 200,
                                 decoration: BoxDecoration(
-                                    color: Colors.deepPurple,
+                                    color: kMapur,
                                     borderRadius: BorderRadius.circular(15)),
                                 child: desc.isLoading
                                     ? const Center(

@@ -20,10 +20,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Route lift',
+        title: 'ACU Delivery',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           useMaterial3: true,
+          primaryColor: Colors.white,
         ),
         initialRoute: '/home',
         routes: routes);

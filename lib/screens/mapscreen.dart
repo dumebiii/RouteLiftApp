@@ -5,8 +5,8 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:routelift/config/constants.dart';
 import 'package:routelift/model/checkout.dart';
+import 'package:routelift/model/hostel.dart';
 import 'package:routelift/services/service_locator.dart';
-import 'package:routelift/viewmodel/descriptionviewmodel.dart';
 import 'package:routelift/viewmodel/mapviewmodel.dart';
 import 'package:routelift/widgets/icontwotext.dart';
 import 'package:routelift/widgets/xm.dart';
@@ -21,7 +21,6 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
   final MapViewModel map = locator<MapViewModel>();
-  final DescriptionViewModel desc = locator<DescriptionViewModel>();
 
   @override
   void initState() {
@@ -33,8 +32,8 @@ class _MapScreenState extends State<MapScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Checkoutt checkoutt =
-        ModalRoute.of(context)!.settings.arguments as Checkoutt;
+    Hostel checkoutt = ModalRoute.of(context)!.settings.arguments as Hostel;
+    map.deliveryLocation = checkoutt.hostelcoordinates;
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -42,7 +41,7 @@ class _MapScreenState extends State<MapScreen> {
             GoogleMap(
               initialCameraPosition: CameraPosition(
                 target: map.driverLocation,
-                zoom: 10,
+                zoom: 17.0,
               ),
               zoomControlsEnabled: false,
               polylines: map.polylines,
@@ -54,7 +53,7 @@ class _MapScreenState extends State<MapScreen> {
                 Marker(
                     markerId: const MarkerId("delivery location"),
                     icon: map.recieverIcon,
-                    position: map.deliveryLocation)
+                    position: map.deliveryLocation!)
               },
               onMapCreated: (GoogleMapController controller) {
                 map.controller.complete(controller);
@@ -133,9 +132,8 @@ class _MapScreenState extends State<MapScreen> {
                                       size: 30,
                                       color: kdeepur,
                                     )),
-                                firsttext:
-                                    checkoutt.deliveryTime ?? 'calculating...',
-                                sectext: 'Delivery time',
+                                firsttext: "5 mins",
+                                sectext: 'Delivery Time',
                               ),
                               const Ym(size: 20),
                               IconcolText(
@@ -151,8 +149,7 @@ class _MapScreenState extends State<MapScreen> {
                                       size: 30,
                                       color: kdeepur,
                                     )),
-                                firsttext: checkoutt.deliveryAddress ??
-                                    'calculating...',
+                                firsttext: checkoutt.hostelName!,
                                 sectext: 'Delivery Adress',
                               )
                             ],
@@ -186,7 +183,7 @@ class _MapScreenState extends State<MapScreen> {
                                     width: 70,
                                   ),
                                   const Xm(size: 10),
-                                  Expanded(
+                                  const Expanded(
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -194,9 +191,9 @@ class _MapScreenState extends State<MapScreen> {
                                           MainAxisAlignment.start,
                                       children: [
                                         Text(
-                                          checkoutt.driverInfo!.name.toString(),
+                                          'James Tunde',
                                           softWrap: true,
-                                          style: const TextStyle(
+                                          style: TextStyle(
                                             fontSize: 21,
                                             fontFamily: "Poppins",
                                             fontWeight: FontWeight.bold,
@@ -204,9 +201,8 @@ class _MapScreenState extends State<MapScreen> {
                                           ),
                                         ),
                                         Text(
-                                          checkoutt.driverInfo!.number
-                                              .toString(),
-                                          style: const TextStyle(
+                                          "08169087630",
+                                          style: TextStyle(
                                             fontSize: 14,
                                             fontFamily: "Poppins",
                                             fontWeight: FontWeight.w500,
@@ -241,11 +237,12 @@ class _MapScreenState extends State<MapScreen> {
   }
 
   void setPolylines() async {
+    print(map.deliveryLocation);
     PolylineResult result = await map.polylinePoints.getRouteBetweenCoordinates(
         "AIzaSyDdfXG9xg1eN3a8RWkP8o6kBSPt-78uKsU",
         PointLatLng(map.driverLocation.latitude, map.driverLocation.longitude),
         PointLatLng(
-            map.deliveryLocation.latitude, map.deliveryLocation.longitude),
+            map.deliveryLocation!.latitude, map.deliveryLocation!.longitude),
         travelMode: TravelMode.driving,
         optimizeWaypoints: true);
 

@@ -7,13 +7,15 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:routelift/services/api_service.dart';
 import 'package:routelift/services/service_locator.dart';
 import 'package:routelift/viewmodel/descriptionviewmodel.dart';
+import 'package:routelift/viewmodel/hostelviewmodel.dart';
 
 class MapViewModel extends ChangeNotifier {
   final Apiservice apiservice = locator<Apiservice>();
   final DescriptionViewModel desc = locator<DescriptionViewModel>();
+  final HostelViewModel hoste = locator<HostelViewModel>();
 
-  LatLng driverLocation = const LatLng(6.605874, 3.349149);
-  LatLng deliveryLocation = const LatLng(6.6999, 4.11667);
+  LatLng driverLocation = const LatLng(7.851347969848399, 3.9478312212036255);
+  LatLng? deliveryLocation;
   Set<Polyline> polylines = <Polyline>{};
   List<LatLng> polylineCoordinates = [];
   late PolylinePoints polylinePoints;
